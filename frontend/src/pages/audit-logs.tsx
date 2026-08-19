@@ -1,0 +1,1 @@
+import { AppLayout } from "@/layouts/AppLayout"; export default function AuditLogs(){return <AppLayout><p className="label">Governance</p><h1 className="mt-1 text-3xl font-semibold">Audit logs</h1><section className="card mt-6 rounded-xl p-6"><p className="text-sm text-muted">Audit events will appear as the shared AssetTrack backend exposes them.</p></section></AppLayout>}
