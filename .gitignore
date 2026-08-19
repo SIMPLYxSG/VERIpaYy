@@ -5,6 +5,9 @@ node_modules/
 .next/
 out/
 
+# generated static assets
+public/pdf.worker.min.mjs
+
 # env files
 .env
 .env.local
@@ -14,3 +17,4 @@ out/
 *.log
 .DS_Store
 .claude/scheduled_tasks.lock
+*.tsbuildinfo
