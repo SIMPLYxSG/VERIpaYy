@@ -53,3 +53,18 @@ employeesRouter.get("/admin/employees", requireAuth, requireRole("admin"), (_req
     .all() as unknown as User[];
   ok(res, { employees: rows });
 });
+
+employeesRouter.delete("/admin/employees/:id", requireAuth, requireRole("admin"), (req, res) => {
+  const { id } = req.params;
+  const user = db.prepare("SELECT * FROM users WHERE id = ? AND role = 'employee'").get(id) as UserRow | undefined;
+  if (!user) return fail(res, "Employee not found", 404);
+
+  // Unassign any assets assigned to this employee
+  db.prepare("UPDATE assets SET assigned_to = NULL WHERE assigned_to = ?").run(id);
+
+  // Delete employee
+  db.prepare("DELETE FROM users WHERE id = ?").run(id);
+
+  ok(res, { id }, "Employee deleted successfully");
+});
+
